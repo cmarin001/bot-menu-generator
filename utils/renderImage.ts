@@ -1,25 +1,26 @@
-
-import chromium from 'chrome-aws-lambda';
 import puppeteer from "puppeteer-core";
+import chromium from "chrome-aws-lambda";
 import fs from "fs";
 
-console.log("🔎 Loaded puppeteer-core from:", require.resolve("puppeteer-core"));
-async function renderHTMLToImage(html: string, imagePath: string): Promise<void> {
+export async function renderHTMLToImage(html: string, imagePath: string): Promise<void> {
   console.log("🧪 Launching browser with chrome-aws-lambda...");
+
+  const executablePath =
+    (await chromium.executablePath) ||
+    "/usr/bin/google-chrome-stable";
+
   const browser = await puppeteer.launch({
     args: chromium.args,
+    executablePath,
+    headless: chromium.headless,
     defaultViewport: chromium.defaultViewport,
-    executablePath: await chromium.executablePath,
-    headless: chromium.headless
   });
 
   const page = await browser.newPage();
-  console.log("🧪 Setting page content...");
   await page.setContent(html, { waitUntil: "networkidle0" });
-  console.log("🧪 Taking screenshot...");
-  await page.screenshot({ path: imagePath });
-  console.log("✅ Screenshot saved:", imagePath);
+  const buffer = await page.screenshot();
+  fs.writeFileSync(imagePath, buffer!);
   await browser.close();
-}
 
-export { renderHTMLToImage };
+  console.log("✅ Screenshot saved");
+}
