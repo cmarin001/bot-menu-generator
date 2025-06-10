@@ -5,6 +5,7 @@
     "start": "vercel dev"
   },
   "dependencies": {
+    "@netlify/functions": "^4.1.4",
     "@types/node": "^20.0.0",
     "@vercel/node": "^1.12.1",
     "chrome-aws-lambda": "^10.1.0",
