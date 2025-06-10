@@ -1,10 +1,10 @@
 
-import puppeteer from "puppeteer";
+import puppeteer, { executablePath } from "puppeteer";
 
 async function renderHTMLToImage(html: string, imagePath: string): Promise<void> {
   console.log("🧪 Launching browser...");
   const browser = await puppeteer.launch({
-    executablePath: puppeteer.executablePath(),
+    executablePath: executablePath(),
     headless: "new",
     args: ["--no-sandbox", "--disable-setuid-sandbox"]
   });
