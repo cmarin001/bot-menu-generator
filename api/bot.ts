@@ -6,7 +6,7 @@ export async function handler(req: VercelRequest, res: VercelResponse) {
     console.log("📩 Incoming update:", JSON.stringify(req.body, null, 2));
 
     if (req.method === "POST") {
-      await bot.processUpdate(req.body);
+       bot.processUpdate(req.body);
       return res.status(200).end("ok");
     }
 
