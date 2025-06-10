@@ -9,7 +9,7 @@
     "@vercel/node": "^1.12.1",
     "chrome-aws-lambda": "^10.1.0",
     "node-telegram-bot-api": "^0.61.0",
-    "puppeteer-core": "^10.4.0"
+    "puppeteer-core": "^10.2.0"
   },
   "devDependencies": {
     "@types/node-telegram-bot-api": "^0.64.9",

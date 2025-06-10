@@ -1,6 +1,7 @@
 
 import chromium from 'chrome-aws-lambda';
 import puppeteer from "puppeteer-core";
+import fs from "fs";
 
 console.log("🔎 Loaded puppeteer-core from:", require.resolve("puppeteer-core"));
 async function renderHTMLToImage(html: string, imagePath: string): Promise<void> {
@@ -18,6 +19,8 @@ async function renderHTMLToImage(html: string, imagePath: string): Promise<void>
   console.log("🧪 Taking screenshot...");
   await page.screenshot({ path: imagePath });
   console.log("✅ Screenshot saved:", imagePath);
+  const buffer = await page.screenshot();
+  fs.writeFileSync(imagePath, buffer!);
   await browser.close();
 }
 
