@@ -7,12 +7,9 @@ import { renderHTMLToImage } from "../utils/renderImage";
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 
 const TELEGRAM_TOKEN = process.env.TELEGRAM_TOKEN!;
-const DEPLOY_URL = process.env.DEPLOY_URL!;
-
 const bot = new TelegramBot(TELEGRAM_TOKEN, { webHook: {} });
-bot.setWebHook(`${DEPLOY_URL}/api/bot`);
 
- async function handler(req: VercelRequest, res: VercelResponse) {
+async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method === "POST") {
     bot.processUpdate(req.body);
     res.status(200).end("ok");
@@ -47,4 +44,4 @@ bot.onText(/\/help/, (msg) => {
   bot.sendMessage(msg.chat.id, `ℹ️ Usa este formato:\n/menu\nSopa: Ajiaco\nPlato fuerte: ...`);
 });
 
-export { handler as default };
+export default handler;
