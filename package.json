@@ -1,6 +1,9 @@
 {
   "name": "menu-bot-ts",
   "version": "1.0.0",
+  "scripts": {
+    "build": "tsc"
+  },
   "dependencies": {
     "@types/node": "^20.0.0",
     "@vercel/node": "^1.12.1",
