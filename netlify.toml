@@ -1,5 +1,5 @@
 [build]
-  command = "npm run build"
+  command = "TMPDIR=/opt/buildhome/tmp npm run build"
   functions = "dist/netlify/functions"
 
 [functions]
@@ -9,5 +9,5 @@
   included_files = [
     "node_modules/chrome-aws-lambda/**",
     "node_modules/puppeteer-core/**",
-    "/tmp/**"
+    "/opt/buildhome/tmp/**"
   ]

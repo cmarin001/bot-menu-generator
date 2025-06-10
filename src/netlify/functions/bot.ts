@@ -3,7 +3,7 @@ import { renderHTMLToImage } from "../../utils/renderImage";
 import { parseMenu } from "../../utils/parseMenu";
 import { generateHTML } from "../../utils/generateHTML";
 import TelegramBot from "node-telegram-bot-api";
-import fs from "fs";
+import fs from "fs/promises";
 
 const TELEGRAM_TOKEN = process.env.TELEGRAM_TOKEN!;
 const bot = new TelegramBot(TELEGRAM_TOKEN, { polling: false });
@@ -26,7 +26,7 @@ const handler: Handler = async (event) => {
 
         const imagePath = await renderHTMLToImage(html, "menu.png");
         await bot.sendPhoto(chatId, imagePath);
-        await fs.promises.unlink(imagePath);
+        await fs.unlink(imagePath);
       } else if (text.startsWith("/start")) {
         await bot.sendMessage(chatId, "👋 ¡Bienvenido! Usa /menu para generar tu menú del día.");
       } else if (text.startsWith("/help")) {
