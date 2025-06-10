@@ -1,18 +1,15 @@
-interface IMenuItem {
-  label: string;
-  value: string;
+function parseMenu(text: string): Record<string, string> {
+  const lines = text.split("\n");
+  const parsed: Record<string, string> = {};
+
+  for (const line of lines) {
+    const [key, ...rest] = line.split(":");
+    if (key && rest.length > 0) {
+      parsed[key.trim()] = rest.join(":").trim();
+    }
+  }
+
+  return parsed;
 }
 
-function parseMenu(text: string): IMenuItem[] {
-  const lines = text.split(/\n|\r/).filter(Boolean);
-  return lines.map((line) => {
-    const [label, ...valueParts] = line.split(":");
-    return {
-      label: label.trim(),
-      value: valueParts.join(":").trim(),
-    };
-  });
-}
-
-export { parseMenu };
-export type { IMenuItem };
+export {parseMenu};
