@@ -5,5 +5,9 @@
 [functions]
   node_bundler = "esbuild"
 
-[functions.bot]
-  included_files = ["/tmp/**"]
+[functions."bot"]
+  included_files = [
+    "node_modules/chrome-aws-lambda/**",
+    "node_modules/puppeteer-core/**",
+    "/tmp/**"
+  ]
