@@ -5,9 +5,10 @@
     "build": "tsc"
   },
   "dependencies": {
-    "puppeteer-core": "^10.4.0",
+    "@netlify/functions": "^4.1.4",
     "chrome-aws-lambda": "^10.1.0",
-    "node-telegram-bot-api": "^0.61.0"
+    "node-telegram-bot-api": "^0.61.0",
+    "puppeteer-core": "^10.4.0"
   },
   "devDependencies": {
     "@types/node": "^20.0.0",
