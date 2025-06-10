@@ -33,6 +33,7 @@ bot.on("text", async (msg) => {
     try {
       await renderHTMLToImage(html, imagePath);
       await bot.sendPhoto(chatId, imagePath);
+      console.log("✅ Sent photo to user:", chatId);
       fs.unlinkSync(imagePath);
     } catch (err) {
       console.error("❌ Error generating menu:", err);
