@@ -1,14 +1,14 @@
 
-import puppeteer from "puppeteer";
 import chromium from 'chrome-aws-lambda';
+import puppeteer from "puppeteer-core";
 
 async function renderHTMLToImage(html: string, imagePath: string): Promise<void> {
-  console.log("🧪 Launching browser...");
+  console.log("🧪 Launching browser with chrome-aws-lambda...");
   const browser = await puppeteer.launch({
-    executablePath: await chromium.executablePath, 
-    headless: chromium.headless,
     args: chromium.args,
-    defaultViewport: chromium.defaultViewport
+    defaultViewport: chromium.defaultViewport,
+    executablePath: await chromium.executablePath,
+    headless: chromium.headless
   });
 
   const page = await browser.newPage();
