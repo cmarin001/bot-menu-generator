@@ -1,7 +1,7 @@
 
 import puppeteer from "puppeteer";
 
-export async function renderHTMLToImage(html: string, imagePath: string): Promise<void> {
+async function renderHTMLToImage(html: string, imagePath: string): Promise<void> {
   console.log("🧪 Launching browser...");
   const browser = await puppeteer.launch({
     headless: "new",
@@ -16,3 +16,5 @@ export async function renderHTMLToImage(html: string, imagePath: string): Promis
   console.log("✅ Screenshot saved:", imagePath);
   await browser.close();
 }
+
+export { renderHTMLToImage };
