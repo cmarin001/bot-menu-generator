@@ -8,7 +8,7 @@
     "skipLibCheck": true,
     "resolveJsonModule": true,
     "moduleResolution": "node",
-    "outDir": "dist"
+    "outDir": "src/netlify/functions",
   },
-  "include": ["netlify", "lib", "utils"]
+  "include": ["src"]
 }
