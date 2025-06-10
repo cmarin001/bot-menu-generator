@@ -1,16 +1,14 @@
 
-import puppeteer, { executablePath } from "puppeteer";
-
-const chromePath = puppeteer
-  .executablePath()
-  .replace('puppeteer-core', 'puppeteer');
+import puppeteer from "puppeteer";
+import chromium from 'chrome-aws-lambda';
 
 async function renderHTMLToImage(html: string, imagePath: string): Promise<void> {
   console.log("🧪 Launching browser...");
   const browser = await puppeteer.launch({
-    executablePath: chromePath, 
-    headless: "new",
-    args: ["--no-sandbox", "--disable-setuid-sandbox"]
+    executablePath: await chromium.executablePath, 
+    headless: chromium.headless,
+    args: chromium.args,
+    defaultViewport: chromium.defaultViewport
   });
 
   const page = await browser.newPage();
