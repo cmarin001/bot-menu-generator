@@ -26,7 +26,7 @@ const handler: Handler = async (event) => {
 
         const imagePath = await renderHTMLToImage(html, "menu.png");
         await bot.sendPhoto(chatId, imagePath);
-        fs.unlinkSync(imagePath);
+        await fs.promises.unlink(imagePath);
       } else if (text.startsWith("/start")) {
         await bot.sendMessage(chatId, "👋 ¡Bienvenido! Usa /menu para generar tu menú del día.");
       } else if (text.startsWith("/help")) {
