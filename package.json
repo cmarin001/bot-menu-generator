@@ -2,8 +2,7 @@
   "name": "menu-bot-ts",
   "version": "1.0.0",
   "scripts": {
-    "build": "tsc",
-    "start": "node dist/api/bot.js"
+    "start": "vercel dev"
   },
   "dependencies": {
     "@types/node": "^20.0.0",
