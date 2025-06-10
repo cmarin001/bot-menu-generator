@@ -9,5 +9,5 @@
     "skipLibCheck": true,
     "outDir": "dist"
   },
-  "include": ["api", "utils"]
+  "include": ["api", "lib", "utils"]
 }
