@@ -2,6 +2,7 @@
 import chromium from 'chrome-aws-lambda';
 import puppeteer from "puppeteer-core";
 
+console.log("🔎 Loaded puppeteer-core from:", require.resolve("puppeteer-core"));
 async function renderHTMLToImage(html: string, imagePath: string): Promise<void> {
   console.log("🧪 Launching browser with chrome-aws-lambda...");
   const browser = await puppeteer.launch({
