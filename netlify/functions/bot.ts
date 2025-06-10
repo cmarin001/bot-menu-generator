@@ -1,9 +1,10 @@
+
 import { Handler } from "@netlify/functions";
-import TelegramBot from "node-telegram-bot-api";
-import fs from "fs";
+import { renderHTMLToImage } from "../../utils/renderImage";
 import { parseMenu } from "../../utils/parseMenu";
 import { generateHTML } from "../../utils/generateHTML";
-import { renderHTMLToImage } from "../../utils/renderImage";
+import TelegramBot from "node-telegram-bot-api";
+import fs from "fs";
 
 const TELEGRAM_TOKEN = process.env.TELEGRAM_TOKEN!;
 const bot = new TelegramBot(TELEGRAM_TOKEN, { polling: false });
