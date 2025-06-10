@@ -19,8 +19,6 @@ async function renderHTMLToImage(html: string, imagePath: string): Promise<void>
   console.log("🧪 Taking screenshot...");
   await page.screenshot({ path: imagePath });
   console.log("✅ Screenshot saved:", imagePath);
-  const buffer = await page.screenshot();
-  fs.writeFileSync(imagePath, buffer!);
   await browser.close();
 }
 

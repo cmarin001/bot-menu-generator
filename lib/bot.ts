@@ -6,9 +6,7 @@ import { parseMenu } from "../utils/parseMenu";
 import { generateHTML } from "../utils/generateHTML";
 import { renderHTMLToImage } from "../utils/renderImage";
 
-const bot = new TelegramBot(process.env.TELEGRAM_TOKEN!, {
-  webHook: {},
-});
+const bot = new TelegramBot(process.env.TELEGRAM_TOKEN!, { polling: false });
 
 bot.on("text", async (msg) => {
   const chatId = msg.chat.id;
