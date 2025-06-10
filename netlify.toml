@@ -1,9 +1,9 @@
 [build]
-  command = "npm run build"
-  functions = "netlify/functions"
+command = "echo 'no build needed'"
+functions = "netlify/functions"
 
 [functions]
-  node_bundler = "esbuild"
+node_bundler = "esbuild"
 
 [functions."bot"]
-  included_files = ["/tmp/**"]
+included_files = ["/tmp/**"]
