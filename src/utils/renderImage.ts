@@ -6,9 +6,11 @@ import path from "path";
 export async function renderHTMLToImage(html: string, filename: string): Promise<string> {
   console.log("🧪 Launching browser...");
 
+  const executablePath = await chromium.executablePath || "/usr/bin/chromium-browser";
+
   const browser = await puppeteer.launch({
     args: chromium.args,
-    executablePath: await chromium.executablePath,
+    executablePath,
     headless: chromium.headless,
   });
 
@@ -16,8 +18,7 @@ export async function renderHTMLToImage(html: string, filename: string): Promise
   await page.setContent(html, { waitUntil: "networkidle0" });
 
   const buffer = (await page.screenshot({ type: "png" })) as Buffer;
-  const tmpDir = process.env.TMPDIR || "/tmp";
-  const tmpPath = path.join(tmpDir, filename);
+  const tmpPath = path.join(process.env.TMPDIR || "/tmp", filename);
   await writeFile(tmpPath, buffer);
 
   await browser.close();
