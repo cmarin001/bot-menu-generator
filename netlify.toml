@@ -1,13 +1,12 @@
 [build]
-  command = "TMPDIR=/opt/buildhome/tmp npm run build"
-  functions = "dist/netlify/functions"
+  command = "npm run build"
+  functions = "src/netlify/functions"
 
 [functions]
   node_bundler = "esbuild"
 
 [functions."bot"]
   included_files = [
-    "node_modules/chrome-aws-lambda/**",
-    "node_modules/puppeteer-core/**",
-    "/opt/buildhome/tmp/**"
+    "node_modules/puppeteer/.local-chromium/**",
+    "/tmp/**"
   ]
