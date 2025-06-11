@@ -9,13 +9,11 @@ async function renderHTMLToImage(html: string, imagePath: string): Promise<strin
     console.log("🧪 Launching browser with chromium...");
 
     let executablePath = await chromium.executablePath();
-
-    // ✅ Hard fallback path for Netlify
+    console.log("🧪 Launching browser with executablePath... ",executablePath);
     if (!executablePath || executablePath === "/opt/buildhome/tmp/chromium") {
       executablePath = "/var/task/node_modules/@sparticuz/chromium/bin/chromium";
     }
-
-    // ✅ Ensure chromium binary exists
+    console.log("🧪 try executablePath... ",executablePath);
     try {
       await fs.access(executablePath);
     } catch {
