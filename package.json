@@ -1,16 +1,14 @@
 {
   "name": "menu-bot-ts",
   "version": "1.0.0",
-  "scripts": {
-    "build": "tsc"
-  },
   "dependencies": {
-    "@netlify/functions": "^4.1.4",
+    "@sparticuz/chromium": "^126.0.0",
+    "@types/node": "^20.0.0",
     "node-telegram-bot-api": "^0.61.0",
-    "puppeteer": "^21.3.8"
+    "puppeteer-core": "^10.2.0"
   },
   "devDependencies": {
-    "@types/node": "^20.0.0",
+    "@netlify/functions": "^4.1.4",
     "@types/node-telegram-bot-api": "^0.64.9",
     "typescript": "^5.3.3"
   }

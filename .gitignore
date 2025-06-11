@@ -17,6 +17,9 @@ dist-ssr
 # Ignore package-lock.json
 package-lock.json
 
+# Storybook build output
+storybook-static
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
@@ -27,4 +30,3 @@ package-lock.json
 *.njsproj
 *.sln
 *.sw?
-.vercel
