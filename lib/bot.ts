@@ -1,4 +1,3 @@
-
 import TelegramBot from "node-telegram-bot-api";
 import fs from "fs";
 import path from "path";
@@ -19,17 +18,21 @@ bot.on("text", async (msg) => {
   }
 
   if (text.startsWith("/help")) {
-    return bot.sendMessage(chatId, `ℹ️ Usa este formato:\n/menu\nSopa: Ajiaco\nPlato fuerte: ...`);
+    return bot.sendMessage(
+      chatId,
+      `ℹ️ Usa este formato:\n/menu\nSopa: Ajiaco\nPlato fuerte: Arroz con pollo\nBebida: Limonada`
+    );
   }
 
   if (text.startsWith("/menu")) {
     const menuText = text.replace("/menu", "").trim();
     const parsedMenu = parseMenu(menuText);
     const html = generateHTML(parsedMenu);
-    const imagePath = path.resolve("menu.png");
+    const filename = "menu.png";
+    const imagePath = path.join("/opt/buildhome/tmp", filename);
 
     try {
-      await renderHTMLToImage(html, imagePath);
+      await renderHTMLToImage(html, filename);
       await bot.sendPhoto(chatId, imagePath);
       console.log("✅ Sent photo to user:", chatId);
       fs.unlinkSync(imagePath);

@@ -6,5 +6,5 @@
   included_files = [
     "node_modules/puppeteer-core/**",
     "node_modules/@sparticuz/chromium/**",
-    "/tmp/**"
+    "/opt/buildhome/tmp/**"
   ]
