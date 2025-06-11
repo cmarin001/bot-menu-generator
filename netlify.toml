@@ -3,8 +3,11 @@
   included_files = [
     "node_modules/@sparticuz/chromium/bin/**"
   ]
+  external_node_modules = ["puppeteer-core", "@sparticuz/chromium"]
 
 [functions."bot"]
   included_files = [
+    "node_modules/puppeteer-core/**",
     "node_modules/@sparticuz/chromium/bin/**"
+    "/opt/buildhome/tmp/**"
   ]
