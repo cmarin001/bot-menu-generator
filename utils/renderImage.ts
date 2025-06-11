@@ -6,7 +6,7 @@ async function renderHTMLToImage(html: string, imagePath: string): Promise<void>
   console.log("🧪 Launching browser with chrome-aws-lambda...");
   const executablePath = await chromium.executablePath()
   const browser = await puppeteer.launch({
-    args: chromium.args,
+    args: [...chromium.args, '--disable-logging'],
     defaultViewport: chromium.defaultViewport,
     executablePath,
     headless: chromium.headless === true
