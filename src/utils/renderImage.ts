@@ -1,5 +1,4 @@
-import chromium from "chrome-aws-lambda";
-import puppeteer from "puppeteer-core";
+import puppeteer from "puppeteer";
 import { writeFile } from "fs/promises";
 import path from "path";
 
@@ -7,27 +6,24 @@ export async function renderHTMLToImage(html: string, filename: string): Promise
   try {
     console.log("🧪 Launching browser...");
 
-    const executablePath = await chromium.executablePath || "/usr/bin/chromium-browser";
-    console.log("📍 Executable path:", executablePath);
-
     const browser = await puppeteer.launch({
-      args: chromium.args,
-      executablePath,
-      headless: chromium.headless,
+      args: ["--no-sandbox", "--disable-setuid-sandbox"],
+      headless: "new",
     });
 
     const page = await browser.newPage();
     await page.setContent(html, { waitUntil: "networkidle0" });
 
-    const buffer = await page.screenshot({ type: "png" });
+    const buffer = (await page.screenshot({ type: "png" })) as Buffer;
     const tmpPath = path.join(process.env.TMPDIR || "/tmp", filename);
-    await writeFile(tmpPath, buffer as Buffer);
+    await writeFile(tmpPath, buffer);
 
     await browser.close();
+
     console.log("✅ Screenshot saved at:", tmpPath);
     return tmpPath;
-  } catch (err) {
-    console.error("❌ renderHTMLToImage error:", err);
-    throw err;
+  } catch (error) {
+    console.error("❌ renderHTMLToImage error:", error);
+    throw error;
   }
 }

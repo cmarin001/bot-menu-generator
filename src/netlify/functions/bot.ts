@@ -1,4 +1,3 @@
-
 import { Handler } from "@netlify/functions";
 import { renderHTMLToImage } from "../../utils/renderImage";
 import { parseMenu } from "../../utils/parseMenu";
