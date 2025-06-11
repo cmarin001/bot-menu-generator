@@ -1,12 +1,28 @@
 import chromium from "@sparticuz/chromium";
 import puppeteer from "puppeteer-core";
+import fs from "fs/promises";
 
 console.log("🔎 Loaded puppeteer-core from:", require.resolve("puppeteer-core"));
 
 async function renderHTMLToImage(html: string, imagePath: string): Promise<string> {
   try {
     console.log("🧪 Launching browser with chromium...");
-    const executablePath = await chromium.executablePath();
+
+    let executablePath = await chromium.executablePath();
+
+    // ✅ Hard fallback path for Netlify
+    if (!executablePath || executablePath === "/opt/buildhome/tmp/chromium") {
+      executablePath = "/var/task/node_modules/@sparticuz/chromium/bin/chromium";
+    }
+
+    // ✅ Ensure chromium binary exists
+    try {
+      await fs.access(executablePath);
+    } catch {
+      throw new Error(
+        `Chromium binary not found at ${executablePath}. Make sure it's included via netlify.toml's included_files.`
+      );
+    }
 
     const browser = await puppeteer.launch({
       args: chromium.args,
