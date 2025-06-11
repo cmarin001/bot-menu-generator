@@ -1,10 +1,10 @@
 [functions]
   node_bundler = "esbuild"
-  external_node_modules = ["puppeteer-core", "@sparticuz/chromium"]
+  included_files = [
+    "node_modules/@sparticuz/chromium/bin/**"
+  ]
 
 [functions."bot"]
   included_files = [
-    "node_modules/puppeteer-core/**",
-    "node_modules/@sparticuz/chromium/**",
-    "/opt/buildhome/tmp/**"
+    "node_modules/@sparticuz/chromium/bin/**"
   ]

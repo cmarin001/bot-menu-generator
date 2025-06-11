@@ -1,10 +1,9 @@
 import chromium from "@sparticuz/chromium";
 import puppeteer from "puppeteer-core";
-import path from "path";
 
 console.log("🔎 Loaded puppeteer-core from:", require.resolve("puppeteer-core"));
 
-async function renderHTMLToImage(html: string, filename: string): Promise<void> {
+async function renderHTMLToImage(html: string, imagePath: string): Promise<string> {
   try {
     console.log("🧪 Launching browser with chromium...");
     const executablePath = await chromium.executablePath();
@@ -20,12 +19,12 @@ async function renderHTMLToImage(html: string, filename: string): Promise<void> 
     console.log("🧪 Setting page content...");
     await page.setContent(html, { waitUntil: "networkidle0" });
 
-    const imagePath = path.join("/opt/buildhome/tmp", filename);
     console.log("🧪 Taking screenshot...");
     await page.screenshot({ path: imagePath });
 
     await browser.close();
     console.log("✅ Screenshot saved:", imagePath);
+    return imagePath;
   } catch (error) {
     console.error("❌ renderHTMLToImage error:", error);
     throw error;

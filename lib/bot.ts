@@ -1,5 +1,6 @@
 import TelegramBot from "node-telegram-bot-api";
 import fs from "fs";
+import os from "os";
 import path from "path";
 import { parseMenu } from "../utils/parseMenu";
 import { generateHTML } from "../utils/generateHTML";
@@ -28,11 +29,12 @@ bot.on("text", async (msg) => {
     const menuText = text.replace("/menu", "").trim();
     const parsedMenu = parseMenu(menuText);
     const html = generateHTML(parsedMenu);
+
     const filename = "menu.png";
-    const imagePath = path.join("/opt/buildhome/tmp", filename);
+    const imagePath = path.join(os.tmpdir(), filename);
 
     try {
-      await renderHTMLToImage(html, filename);
+      await renderHTMLToImage(html, imagePath);
       await bot.sendPhoto(chatId, imagePath);
       console.log("✅ Sent photo to user:", chatId);
       fs.unlinkSync(imagePath);
